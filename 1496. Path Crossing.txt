@@ -1,0 +1,41 @@
+1496. Path Crossing
+
+Given a string path, where path[i] = 'N', 'S', 'E' or 'W', each representing moving one unit north, south, east, or west, respectively. You start at the origin (0, 0) on a 2D plane and walk on the path specified by path.
+
+Return true if the path crosses itself at any point, that is, if at any time you are on a location you have previously visited. Return false otherwise.
+Constraints:
+
+1 <= path.length <= 104
+path[i] is either 'N', 'S', 'E', or 'W'.
+
+Solutions :
+class Solution {
+    public boolean isPathCrossing(String path) {
+        int vert=0;
+        int hori=0;
+        HashSet<String> visited=new HashSet<>();
+        visited.add("0,0");
+        for(int i=0;i<path.length();i++){
+            if(path.charAt(i)=='N'){
+                hori++;
+            }
+            if(path.charAt(i)=='S'){
+                hori--;
+            }
+            if(path.charAt(i)=='E'){
+                vert++;
+            }
+            if(path.charAt(i)=='W'){
+                vert--;
+            }
+            String curr=vert+","+hori;
+            if(visited.contains(curr)){
+            return true;
+            }
+            visited.add(curr);
+        }
+
+        
+        return false;
+    }
+}
