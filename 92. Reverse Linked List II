@@ -1,0 +1,78 @@
+92. Reverse Linked List II
+Given the head of a singly linked list and two integers left and right where left <= right, reverse the nodes of the list from position left to position right, and return the reversed list.
+
+ 
+
+Example 1:
+
+
+Input: head = [1,2,3,4,5], left = 2, right = 4
+Output: [1,4,3,2,5]
+Example 2:
+
+Input: head = [5], left = 1, right = 1
+Output: [5]
+ 
+
+Constraints:
+
+The number of nodes in the list is n.
+1 <= n <= 500
+-500 <= Node.val <= 500
+1 <= left <= right <= n
+
+SOLUTION :
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode curr=head;
+        int size=0;
+        while(curr!=null){
+            size++;
+            curr=curr.next;
+        }
+        int nums[]=new int[size]; 
+        curr=head;
+        int i=0;
+        while(curr!=null){
+            nums[i]=curr.val;
+            i++;
+            curr=curr.next;
+        }
+        reverse(nums,left-1,right-1);
+        curr=head;
+        i=0;
+        while(curr!=null){
+            curr.val=nums[i];
+            i++;
+            curr=curr.next;
+        }
+        // ListNode dummy=new ListNode(0);
+        // ListNode curr1=dummy;
+        // for(Integer n:nums){
+        //     curr1.next = new ListNode(n);
+        //     curr1=curr1.next;
+        // }
+        // return dummy.next;
+        return head;
+
+    }
+    private static void reverse(int nums[],int i,int j){
+        while(i<j){
+            int temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+            i++;
+            j--;
+        }
+    }
+}
